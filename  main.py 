@@ -1,0 +1,26 @@
+# main.py
+import asyncio
+import json
+from crawler import crawl
+
+def save_output(data, filename="output/output.json"):
+    """
+    Save output data to a JSON file.
+    """
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+if __name__ == "__main__":
+    domains = [
+        "https://example1.com",
+        "https://example2.com",
+        "https://example3.com"
+    ]
+
+    print("Crawling started...")
+    results = asyncio.run(crawl(domains))
+    print(f"Crawling completed. Found URLs for {len(results)} domains.")
+
+    # Save results to a file
+    save_output(results)
+    print("Results saved to output/output.json")
